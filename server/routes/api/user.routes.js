@@ -1,28 +1,15 @@
-const  authJwt  = require("../../middlewares/authJwt");
-const controller = require("../../controllers/user.controller");
+const express = require("express");
+const router = express.Router();
+const User = require("../../Models/User.model");
 
-module.exports = function(app) {
-  app.use(function(req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
-    next();
+router.post("/signup", (req, res) => {
+  const newUser = new User({
+    username: req.params.username,
+    email: req.params.email,
+    password: req.params.password,
   });
-
-  app.get("/api/test/all", controller.allAccess);
-
-  app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
-
-  app.get(
-    "/api/test/mod",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.moderatorBoard
-  );
-
-  app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
-  );
-};
+  newUser.save((err, data) => {
+    if (err) console.error(err);
+    res.send("New user created");
+  });
+});

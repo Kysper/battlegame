@@ -1,11 +1,8 @@
-const express = require("express");
-const connectDB = require("./config/db");
-const cors = require("cors");
+const  express = require("express")
+const connectDB = require("./config/db.js")
+const cors = require("cors")
 
 const app = express();
-
-require("./routes/api/auth.routes")(app);
-require("./routes/api/user.routes")(app);
 
 const corsOptions = {
   origin: "http://localhost:9000",
@@ -14,8 +11,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 connectDB();
-
-app.get("/", (req, res) => res.send("Hello World"));
 
 const PORT = process.env.PORT || 9000;
 
