@@ -17,14 +17,10 @@ export class Form extends Component {
   };
 
   handleSubmit = async (event) => {
-    const user = {
-      username: "Asdqwe",
-      email: "Qwerty@qwerty",
-      password: "password12345",
-    };
+    const { username, email, password } = this.state;
     event.preventDefault();
     await axios
-      .post("http://localhost:3001/api/register", { user })
+      .post("http://localhost:3001/api/register", { username, email, password })
       .then((response) => {
         console.log(response);
       })

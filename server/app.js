@@ -1,25 +1,21 @@
 const express = require("express");
 const connectDB = require("./config/db.js");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const app = express();
-
+// const User = require("./Models/User.model")
 app.use(cors());
-
 app.use(express.json());
+
+//Import Routes 
+const authRouter = require('./routes/auth')
+
+
+app.use('/api', authRouter)
 
 
 app.get("/", (req, res) => {});
 
-app.post("/api/register", async (req, res, next) => {
-  try {
-    const user = req.body;
-    console.log("Data recieved");
-    console.log(user)
-  } catch (err) {
-    console.log(err);
-  }
-});
+
 
 connectDB();
 

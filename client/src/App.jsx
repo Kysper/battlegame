@@ -1,10 +1,11 @@
-import React from "react";
-import Form from './components/form/form'
-class App extends React.Component {
+import { Component } from "react";
+import Home from "./components/home/home";
+
+class App extends Component {
   render() {
     return (
       <div className="App">
-        <Form />
+        <Home />
       </div>
     );
   }
